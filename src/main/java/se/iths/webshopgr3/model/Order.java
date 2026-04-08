@@ -16,8 +16,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, name = "order_items")
-    private List<OrderItem> orderItems;
+//    @Column(nullable = false, name = "order_items")
+//    private List<OrderItem> orderItems;
 
     @Column(nullable = false, name = "customer")
     private String username;
