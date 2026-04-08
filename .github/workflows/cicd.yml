@@ -21,8 +21,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
         server-id: github
-        server-username: ${{ secrets.MY_GITHUB_USERNAME }}
-        server-password: ${{ secrets.MY_GITHUB_TOKEN }}
+        server-username: MY_GITHUB_USERNAME
+        server-password: MY_GITHUB_TOKEN
 
     - name: Build with Maven
       run: mvn -B clean package
+      env:
+        MY_GITHUB_USERNAME: ${{ secrets.MY_GITHUB_USERNAME }}
+        MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
