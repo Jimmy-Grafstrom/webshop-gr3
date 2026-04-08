@@ -1,13 +1,10 @@
 package se.iths.webshopgr3.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import se.iths.webshopgr3.repository.AppUserRepository;
 
 @Service
+@RequiredArgsConstructor
 public class AppUserService {
-    private AppUserRepository userRepository;
-
-    public AppUserService(AppUserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    
 }

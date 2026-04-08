@@ -1,14 +1,10 @@
 package se.iths.webshopgr3.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import se.iths.webshopgr3.repository.ProductRepository;
 
 @Service
+@RequiredArgsConstructor
 public class OrderItemService {
 
-    private ProductRepository productRepository;
-
-    public OrderItemService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 }
