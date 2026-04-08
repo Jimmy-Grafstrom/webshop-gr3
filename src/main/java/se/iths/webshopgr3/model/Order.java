@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -31,9 +30,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, List<OrderItem> orderItems, String username, double totalPrice, Date orderDate) {
+    public Order(Long id, String username, double totalPrice, Date orderDate) {
         this.id = id;
-        this.orderItems = orderItems;
+//        this.orderItems = orderItems;
         this.username = username;
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;
