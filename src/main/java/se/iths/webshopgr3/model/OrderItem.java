@@ -23,6 +23,11 @@ public class OrderItem {
     @Column(nullable = false, name = "price")
     private double price;
 
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
+
     public OrderItem() {
     }
 

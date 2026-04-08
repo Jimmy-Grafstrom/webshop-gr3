@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,9 +16,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(nullable = false, name = "order_items")
-//    private List<OrderItem> orderItems;
-
     @Column(nullable = false, name = "customer")
     private String username;
 
@@ -25,12 +23,15 @@ public class Order {
     private double totalPrice;
 
     @Column(nullable = false, name = "order_date")
-    private Date orderDate;
+    private LocalDateTime orderDate;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
 
     public Order() {
     }
 
-    public Order(Long id, String username, double totalPrice, Date orderDate) {
+    public Order(Long id, String username, double totalPrice, LocalDateTime orderDate) {
         this.id = id;
 //        this.orderItems = orderItems;
         this.username = username;
