@@ -103,7 +103,7 @@
     <repositories>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/L2025S/mail-function-library</url>
+            <url>https://maven.pkg.github.com/l2025s/mail-function-library</url>
         </repository>
     </repositories>
 
