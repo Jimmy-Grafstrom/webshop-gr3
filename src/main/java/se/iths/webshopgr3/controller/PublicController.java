@@ -18,7 +18,7 @@ public class PublicController {
         return "cookie-policy";
     }
 
-    @GetMapping("/integritypolicy")
+    @GetMapping("/privacy-policy")
     public String integrityPolicy() {
         return "privacy-policy";
     }

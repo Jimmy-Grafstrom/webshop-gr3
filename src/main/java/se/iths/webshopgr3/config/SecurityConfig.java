@@ -25,10 +25,11 @@ public class SecurityConfig {
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
                 )
                 .authorizeHttpRequests((requests) -> requests
-                                .requestMatchers("/", "/products/**", "/cart/**", "/confirmation", "/h2-console/**", "/register", "/css/**", "/js/**").permitAll()
+                                .requestMatchers("/", "/products/**", "/cart/**", "/confirmation", "/h2-console/**", "/register", "/css/**", "/js/**", "/cookie-policy", "/privacy-policy", "/start").permitAll()
                                 .requestMatchers("/h2-console/**").permitAll()
 //                        .requestMatchers("/admin/**").hasRole("ADMIN") // Prepared for admin endpoint
-                                .anyRequest().authenticated()
+                                .anyRequest()
+                                .authenticated()
                 )
 //                .formLogin(form -> form
 //                        .loginPage("/login")
