@@ -2,8 +2,11 @@ package se.iths.webshopgr3.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,19 +22,24 @@ public class SecurityConfig {
                         .ignoringRequestMatchers("/h2-console/**")
                 )
                 .headers(headers -> headers
-                        .frameOptions(frame -> frame.sameOrigin())
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
                 )
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/products/**", "/cart/**", "/confirmation", "/h2-console/**", "/register", "/css/**", "/js/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
+                                .requestMatchers("/", "/products/**", "/cart/**",
+                                        "/confirmation", "/h2-console/**", "/register",
+                                        "/css/**", "/js/**", "/cookie-policy", "/privacy-policy", "/start").permitAll()
+                                .requestMatchers("/h2-console/**").permitAll()
+                                //.requestMatchers("/user").hasRole("USER") // prepared for user endpoint
 //                        .requestMatchers("/admin/**").hasRole("ADMIN") // Prepared for admin endpoint
-                        .anyRequest().authenticated()
+                                .anyRequest()
+                                .authenticated()
                 )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
-                .logout((logout) -> logout.permitAll());
+//                .formLogin(form -> form
+//                        .loginPage("/login")
+//                        .permitAll()
+//                )
+                .formLogin(Customizer.withDefaults()) //using to make sure that the flow is correct.
+                .logout(LogoutConfigurer::permitAll);
 
         return http.build();
     }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+
+<!--Header-->
+
+<h1>Welcome to the Webshop</h1>
+
+<div>
+    <button>
+        <a th:href="@{/login}">Login</a>
+    </button>
+    <button>
+        <a th:href="@{/sign-up}">Sign up</a>
+    </button>
+    <button>
+        <a th:href="@{/logout}">Logout</a>
+    </button>
+</div>
+
+<!--Footer-->
+<a th:href="@{/privacy-policy}">Privacy policy</a>
+<a th:href="@{/cookie-policy}">Cookie policy</a>
+
+</body>
+</html>

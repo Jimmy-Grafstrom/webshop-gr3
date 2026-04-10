@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+</head>
+<body>
+
+<h1>Sign up</h1>
+<p>Sign up and become one of our members!</p>
+
+<form th:action="@{/login}" th:object="${user}" method="post">
+    <label>
+        Username
+        <input type="text" name="username" placeholder="Username">
+    </label>
+    <label>
+        Password
+        <input type="password" name="password" placeholder="Password">
+    </label>
+    <label>
+        Allow cookies
+        <input type="checkbox" name="cookie-consent">
+    </label>
+
+    <button type="submit">Sign up</button>
+</form>
+
+</body>
+</html>

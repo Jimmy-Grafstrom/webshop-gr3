@@ -20,10 +20,19 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        if (!appUserRepository.existsByUsername("user")) {
+            AppUser user = new AppUser();
+            user.setUsername("user");
+            user.setPassword(passwordEncoder.encode("user"));
+            user.setConsent(true);
+            user.setRole("USER");
+            appUserRepository.save(user);
+        }
+
         if (!appUserRepository.existsByUsername("admin")) {
             AppUser admin = new AppUser();
             admin.setUsername("admin");
-            admin.setPassword(passwordEncoder.encode(adminPassword));
+            admin.setPassword(passwordEncoder.encode("admin"));
             admin.setConsent(true);
             admin.setRole("ADMIN");
             appUserRepository.save(admin);
