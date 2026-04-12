@@ -39,7 +39,7 @@ public class SecurityConfig {
                                 .requestMatchers("/", "/products/**", "/cart/**",
                                         "/confirmation", "/h2-console/**", "/register",
                                         "/css/**", "/js/**", "/cookie-policy", "/privacy-policy", "/start","/ott/sent").permitAll()
-                                .requestMatchers("/h2-console/**").permitAll()
+
                                 //.requestMatchers("/user").hasRole("USER") // prepared for user endpoint
 //                        .requestMatchers("/admin/**").hasRole("ADMIN") // Prepared for admin endpoint
                                 .anyRequest()
