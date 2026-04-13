@@ -9,22 +9,41 @@
 <h1>Sign up</h1>
 <p>Sign up and become one of our members!</p>
 
+
 <form th:action="@{/login}" th:object="${user}" method="post">
-    <label>
-        Username
-        <input type="text" name="username" placeholder="Username">
-    </label>
-    <label>
-        Password
-        <input type="password" name="password" placeholder="Password">
-    </label>
-    <label>
-        Allow cookies
-        <input type="checkbox" name="cookie-consent">
-    </label>
+
+    <div class="error-message-div">
+        <p th:if="${#fields.hasErrors()}"></p>
+        <p th:if="${#fields.hasErrors(user.username)}"></p>
+        <p th:if="${#fields.hasErrors(user.password)}"></p>
+    </div>
+
+    <div>
+        <label>
+            Username
+            <input type="text" name="username" placeholder="Username">
+        </label>
+    </div>
+
+    <div>
+
+        <label>
+            Password
+            <input type="password" name="password" placeholder="Password">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            By checking this box you agree to our privacy policy in terms of handling your personal information.
+            <input type="checkbox" required="required">
+        </label>
+    </div>
 
     <button type="submit">Sign up</button>
+
 </form>
 
 </body>
+
 </html>
