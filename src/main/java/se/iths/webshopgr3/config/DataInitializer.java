@@ -22,7 +22,7 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if (!appUserRepository.existsByUsername("user")) {
             AppUser user = new AppUser();
-            user.setUsername("user");
+            user.setUsername("user@test.com");
             user.setPassword(passwordEncoder.encode("user"));
             user.setConsent(true);
             user.setRole("USER");
@@ -32,7 +32,7 @@ public class DataInitializer implements CommandLineRunner {
 
         if (!appUserRepository.existsByUsername("admin")) {
             AppUser admin = new AppUser();
-            admin.setUsername("admin");
+            admin.setUsername("admin@test.com");
             admin.setPassword(passwordEncoder.encode("admin"));
             admin.setConsent(true);
             admin.setRole("ADMIN");
