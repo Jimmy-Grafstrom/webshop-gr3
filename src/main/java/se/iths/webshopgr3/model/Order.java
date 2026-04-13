@@ -1,7 +1,9 @@
 package se.iths.webshopgr3.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -10,6 +12,8 @@ import java.util.List;
 @Entity(name = "orders")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
 
     @Id
@@ -28,14 +32,4 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
-    public Order() {
-    }
-
-    public Order(Long id, String username, List<OrderItem> orderItems, double totalPrice, LocalDateTime orderDate) {
-        this.id = id;
-        this.orderItems = orderItems;
-        this.username = username;
-        this.totalPrice = totalPrice;
-        this.orderDate = orderDate;
-    }
 }

@@ -10,9 +10,6 @@ public class AppUserService {
     AppUserService appUserService;
 
     public void saveUser(AppUser user) {
-
-
-
         appUserService.saveUser(user);
     }
 
