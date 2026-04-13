@@ -13,6 +13,7 @@
 <form th:action="@{/login}" th:object="${user}" method="post">
 
     <div class="error-message-div">
+        <p th:if="${#fields.hasErrors()}"></p>
         <p th:if="${#fields.hasErrors(user.username)}"></p>
         <p th:if="${#fields.hasErrors(user.password)}"></p>
     </div>
@@ -34,8 +35,8 @@
 
     <div>
         <label>
-            Allow cookies
-            <input type="checkbox" name="cookie-consent">
+            By checking this box you agree to our privacy policy in terms of handling your personal information.
+            <input type="checkbox" required="required">
         </label>
     </div>
 
