@@ -1,12 +1,16 @@
 package se.iths.webshopgr3.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "order_item")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderItem {
 
     @Id
@@ -27,14 +31,4 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private Order order;
 
-
-    public OrderItem() {
-    }
-
-    public OrderItem(Long id, String productName, int quantity, double price) {
-        this.id = id;
-        this.productName = productName;
-        this.quantity = quantity;
-        this.price = price;
-    }
 }
