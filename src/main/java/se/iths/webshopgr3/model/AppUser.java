@@ -2,14 +2,17 @@ package se.iths.webshopgr3.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +24,7 @@ public class AppUser {
             regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
             message = "Email is invalid"
     )
-    @NotEmpty(message = "You must enter an email-adress")
+    @NotBlank(message = "You must enter an email-address")
     @Column(nullable = false, unique = true, name = "username")
     private String username;
 
@@ -35,14 +38,4 @@ public class AppUser {
     @Column(nullable = false, name = "role")
     private String role;
 
-    public AppUser() {
-    }
-
-    public AppUser(Long id, String username, String password, boolean consent, String role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.consent = consent;
-        this.role = role;
-    }
 }
