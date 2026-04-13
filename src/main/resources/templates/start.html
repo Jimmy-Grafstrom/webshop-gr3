@@ -6,7 +6,8 @@
 </head>
 <body>
 
-<!--Header-->
+<div th:replace="fragments/header::header"></div>
+
 
 <h1>Welcome to the Webshop</h1>
 
@@ -22,10 +23,8 @@
     </button>
 </div>
 
+<div th:replace="fragments/footer::footer"></div>
 
-<!--Footer-->
-<a th:href="@{/privacy-policy}">Privacy policy</a>
-<a th:href="@{/cookie-policy}">Cookie policy</a>
 
 </body>
 </html>

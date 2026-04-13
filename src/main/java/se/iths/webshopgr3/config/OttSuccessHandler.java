@@ -9,8 +9,8 @@ import org.springframework.security.web.authentication.ott.OneTimeTokenGeneratio
 import org.springframework.security.web.authentication.ott.RedirectOneTimeTokenGenerationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import se.iths.lw.mailfunctionlibrary.service.MessageService;
 import se.iths.lw.mailfunctionlibrary.model.Email;
+import se.iths.lw.mailfunctionlibrary.service.MessageService;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class OttSuccessHandler implements OneTimeTokenGenerationSuccessHandler {
     private final RedirectOneTimeTokenGenerationSuccessHandler redirectOneTimeTokenGenerationSuccessHandler;
 
     public OttSuccessHandler(MessageService messageService,
-                             RedirectOneTimeTokenGenerationSuccessHandler redirectOneTimeTokenGenerationSuccessHandler){
+                             RedirectOneTimeTokenGenerationSuccessHandler redirectOneTimeTokenGenerationSuccessHandler) {
         this.messageService = messageService;
         this.redirectOneTimeTokenGenerationSuccessHandler = redirectOneTimeTokenGenerationSuccessHandler;
     }
@@ -30,7 +30,7 @@ public class OttSuccessHandler implements OneTimeTokenGenerationSuccessHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, OneTimeToken oneTimeToken) throws IOException, ServletException {
         String link = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/login/ott")
-                .queryParam("token",oneTimeToken.getTokenValue())
+                .queryParam("token", oneTimeToken.getTokenValue())
                 .toUriString();
 
         Email email = new Email();
