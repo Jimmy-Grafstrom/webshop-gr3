@@ -10,7 +10,6 @@ import se.iths.webshopgr3.repository.AppUserRepository;
 
 @Configuration
 @RequiredArgsConstructor
-
 public class DataInitializer implements CommandLineRunner {
     private final AppUserRepository appUserRepository;
     private final PasswordEncoder passwordEncoder;

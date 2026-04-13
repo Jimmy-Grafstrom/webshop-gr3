@@ -3,6 +3,7 @@ package se.iths.webshopgr3.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/")
@@ -21,6 +22,12 @@ public class PublicController {
     @GetMapping("/privacy-policy")
     public String integrityPolicy() {
         return "privacy-policy";
+    }
+
+    @GetMapping("/ott/sent")
+    @ResponseBody
+    public String ottSent(){
+        return "One Time Token sent!";
     }
 
 }
