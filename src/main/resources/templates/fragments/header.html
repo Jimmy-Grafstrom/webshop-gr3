@@ -19,7 +19,7 @@
         <div class="header-buttons">
             <div sec:authorize="!isAuthenticated()">
                 <button>
-                    <a th:hred="@{/register}"></a>
+                    <a th:href="@{/register}">Register</a>
                 </button>
                 <button>
                     <a th:href="@{/login}">Log in</a>
