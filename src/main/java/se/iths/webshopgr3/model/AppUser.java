@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "app_users")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,7 +17,7 @@ import lombok.Setter;
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
 
@@ -36,6 +37,7 @@ public class AppUser {
     private boolean consent;
 
     @Column(nullable = false, name = "role")
+    @NotBlank(message = "You must select a role")
     private String role;
 
 }
