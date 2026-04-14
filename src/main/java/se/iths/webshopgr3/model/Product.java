@@ -1,43 +1,41 @@
 package se.iths.webshopgr3.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Setter
+@Table(name = "products")
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false, name = "product_name")
+    @NotBlank(message = "Product name is required")
     private String name;
 
     @Column(nullable = false, name = "price")
+    @Positive(message = "Price must be a positive number")
+    @NotNull(message = "Price is required")
     private double price;
 
     @Column(nullable = false, name = "category")
+    @NotBlank(message = "Category is required")
     private String category;
 
     @Column(nullable = false, name = "image_url")
+    @NotBlank(message = "Image URL is required")
     private String imageUrl;
-
-    public Product() {
-    }
-
-    public Product(Long id, String name, double price, String category, String imageUrl) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.category = category;
-        this.imageUrl = imageUrl;
-    }
-
-    public double getPris() {
-        return 0;
-    }
 }
 
