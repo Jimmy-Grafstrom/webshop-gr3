@@ -1,39 +1,47 @@
 package se.iths.webshopgr3.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.web.context.annotation.SessionScope;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SessionScope
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cart {
 
     private List<CartItem> items = new ArrayList<>();
+    private double totalPrice;
 
-    public void addProduct(Product product) {
+    public void addProductToCart(CartItem cartItem) {
 
-        for (CartItem item : items) {
-            if (item.getProduct().getId().equals(product.getId())) {
-                item.increaseQuantity();
-                return;
+        for (CartItem product : items) {
+            if (product.getId() == cartItem.getId()) {
+                increaseQuantity(product);
+            } else {
+                items.add(cartItem);
             }
         }
-
-        items.add(new CartItem(product));
     }
 
-    public List<CartItem> getItems() {
+    public List<CartItem> getAllProductsInCart() {
         return items;
     }
 
-    public double getTotalPrice() {
-        double total = 0;
-
-        for (CartItem item : items) {
-            total += item.getTotalPrice();
+    public void updatePrice() {
+        totalPrice = 0;
+        for (CartItem product : items) {
+            totalPrice += product.getQuantity() * product.getProduct().getPrice();
         }
-
-        return total;
     }
 
-    public void clear() {
+    public void increaseQuantity(CartItem itemInCart) {
+        itemInCart.setQuantity(itemInCart.getQuantity() + 1);
+    }
+
+    public void clearCart() {
         items.clear();
     }
 }
