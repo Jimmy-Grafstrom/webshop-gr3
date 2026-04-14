@@ -1,5 +1,6 @@
 package se.iths.webshopgr3.controller;
 
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class CartController {
 
     @PostMapping("/add/{id}")
     public String addToCart(@PathVariable Long id, HttpSession session) {
-        Product product = productService.getProductById(id);
+        Product product = productService.getProductById(id).orElseThrow();
 
         Cart cart = getCart(session);
         cart.addProduct(product);
