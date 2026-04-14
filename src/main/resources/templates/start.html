@@ -8,6 +8,16 @@
 
 <div th:replace="fragments/header::header"></div>
 
+<div th:if="${cookieFeedback}" style="background-color: #d4edda; color: #155724; padding: 15px; text-align: center; border-bottom: 1px solid #c3e6cb;">
+    <p th:text="${cookieFeedback}"></p>
+</div>
+
+<div th:if="${!hasConsent}" id="cookie-banner" style="background-color: #f1f1f1; padding: 20px; text-align: center; border-bottom: 1px solid #ccc;">
+    <p>Vi använder cookies för att förbättra din upplevelse på vår webbplats.</p>
+    <form th:action="@{/consent}" method="post">
+        <button type="submit">Acceptera cookies</button>
+    </form>
+</div>
 
 <h1>Welcome to the Webshop</h1>
 
