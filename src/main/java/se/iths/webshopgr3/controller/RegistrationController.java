@@ -15,7 +15,7 @@ import se.iths.webshopgr3.service.AppUserService;
 @AllArgsConstructor
 public class RegistrationController {
 
-    private AppUserService appUserService;
+    private final AppUserService appUserService;
 
     @GetMapping
     private String getRegistrationForm(Model model) {
