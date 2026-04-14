@@ -15,15 +15,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.ott.RedirectOneTimeTokenGenerationSuccessHandler;
 
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@EnableMultiFactorAuthentication(
+/*@EnableMultiFactorAuthentication(
         authorities = {
                 FactorGrantedAuthority.PASSWORD_AUTHORITY,
                 FactorGrantedAuthority.OTT_AUTHORITY
         }
-)
+)*/
 public class SecurityConfig {
 
     @Bean
@@ -40,12 +42,15 @@ public class SecurityConfig {
                                         "/confirmation", "/h2-console/**", "/register",
                                         "/css/**", "/js/**", "/cookie-policy", "/privacy-policy", "/start", "/ott/sent", "/consent").permitAll()
 
-                                //.requestMatchers("/user").hasRole("USER") // prepared for user endpoint
-//                        .requestMatchers("/admin/**").hasRole("ADMIN") // Prepared for admin endpoint
+                                .requestMatchers("/user").hasRole("USER") // prepared for user endpoint
+                                .requestMatchers("/admin/**").hasRole("ADMIN") // Prepared for admin endpoint
                                 .anyRequest()
                                 .authenticated()
                 )
-                .formLogin(Customizer.withDefaults()) //using to make sure that the flow is correct.
+                .formLogin(form -> form
+                        .successHandler(authenticationSuccessHandler())
+                        .permitAll()
+                )
                 .oneTimeTokenLogin(ott ->
                         ott.tokenGenerationSuccessHandler(
                                 ottSuccessHandler
@@ -53,6 +58,20 @@ public class SecurityConfig {
                 .logout(LogoutConfigurer::permitAll);
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return (request, response, authentication) -> {
+            var authorities = authentication.getAuthorities();
+            boolean isAdmin = authorities.stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+            if (isAdmin) {
+                response.sendRedirect("/admin");
+            } else {
+                response.sendRedirect("/");
+            }
+        };
     }
 
     @Bean
