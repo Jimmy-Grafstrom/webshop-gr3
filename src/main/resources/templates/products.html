@@ -10,8 +10,8 @@
 <!-- Loop through products -->
 <div th:each="product : ${products}">
 
-    <p th:text="${product.namn}"></p>
-    <p th:text="${product.pris}"></p>
+    <p th:text="${product.name}"></p>
+    <p th:text="${product.price}"></p>
 
     <!-- ✅ Add to cart button -->
     <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
