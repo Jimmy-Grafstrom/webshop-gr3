@@ -1,5 +1,12 @@
 package se.iths.webshopgr3.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class CartItem {
 
     private Product product;
@@ -15,14 +22,8 @@ public class CartItem {
     }
 
     public double getTotalPrice() {
-        return product.getPris() * quantity;
+        double total = product. getPris() * quantity;
+        return total;
+    }
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-}

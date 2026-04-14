@@ -35,4 +35,9 @@ public class Product {
         this.category = category;
         this.imageUrl = imageUrl;
     }
+
+    public double getPris() {
+        return 0;
+    }
 }
+

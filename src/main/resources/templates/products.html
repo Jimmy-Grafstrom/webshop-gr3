@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Products</title>
+</head>
+<body>
+
+<h1>Products 🛍️</h1>
+
+<!-- Loop through products -->
+<div th:each="product : ${products}">
+
+    <p th:text="${product.namn}"></p>
+    <p th:text="${product.pris}"></p>
+
+    <!-- ✅ Add to cart button -->
+    <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
+        <button type="submit">Add to cart</button>
+    </form>
+
+</div>
+
+<br>
+<a href="/cart">Go to Cart 🛒</a>
+
+</body>
+</html>
