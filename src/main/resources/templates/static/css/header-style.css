@@ -1,0 +1,15 @@
+nav {
+    background-color: #F5CAC3;
+    color: black;
+    padding: 25px 20px;
+}
+
+.header-buttons {
+    background-color: #F6BD60;
+    padding: 15px 10px;
+
+}
+
+a {
+    text-decoration: none;
+}

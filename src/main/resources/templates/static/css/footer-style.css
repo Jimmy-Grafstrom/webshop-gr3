@@ -1,0 +1,14 @@
+nav {
+    background-color: #F5CAC3;
+    color: black;
+    padding: 25px 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    background-color: #F6BD60;
+    padding: 15px 10px;
+}
