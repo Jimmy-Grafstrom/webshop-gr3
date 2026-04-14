@@ -33,7 +33,7 @@ public class Cart {
     public void updatePrice() {
         totalPrice = 0;
         for (CartItem product : items) {
-            totalPrice += product.getTotalPrice() * product.getQuantity();
+            totalPrice += product.getQuantity() * product.getProduct().getPrice();
         }
     }
 
