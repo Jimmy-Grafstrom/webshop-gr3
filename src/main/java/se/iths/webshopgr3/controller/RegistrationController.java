@@ -18,7 +18,7 @@ public class RegistrationController {
     private final AppUserService appUserService;
 
     @GetMapping
-    private String getRegistrationForm(Model model) {
+    public String getRegistrationForm(Model model) {
         model.addAttribute("user", new AppUser());
         return "register";
     }
@@ -26,7 +26,7 @@ public class RegistrationController {
     @PostMapping
     public String addUser(@ModelAttribute AppUser user) {
         appUserService.saveUser(user);
-        return "redirect://start";
+        return "redirect:/start";
     }
 
 }
