@@ -14,11 +14,11 @@
 
 <form th:action="@{/login}" th:object="${user}" method="post">
 
-    <!--    <div class="error-message-div">-->
-    <!--        <p th:if="${#fields.hasErrors()}"></p>-->
-    <!--        <p th:if="${#fields.hasErrors(user.username)}"></p>-->
-    <!--        <p th:if="${#fields.hasErrors(user.password)}"></p>-->
-    <!--    </div>-->
+    <div class="error-message-div">
+        <p th:if="${#fields.hasErrors()}"></p>
+        <p th:if="${#fields.hasErrors('username')}"></p>
+        <p th:if="${#fields.hasErrors('password')}"></p>
+    </div>
 
     <div>
         <label>
