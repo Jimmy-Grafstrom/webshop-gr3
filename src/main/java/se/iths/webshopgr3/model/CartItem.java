@@ -22,7 +22,7 @@ public class CartItem {
     }
 
     public double getTotalPrice() {
-        double total = product. getPris() * quantity;
+        double total = product.getPrice() * quantity;
         return total;
     }
     }
