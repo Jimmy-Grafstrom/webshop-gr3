@@ -17,7 +17,11 @@ public class OrderItemService {
      * Does not need to be saved separately as Order uses CascadeType.ALL.
      */
     public OrderItem createOrderItem(CartItem cartItem, Order order) {
-        // TODO: Implement mapping from CartItem to OrderItem
-        return new OrderItem();
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProductName(cartItem.getProduct().getName());
+        orderItem.setQuantity(cartItem.getQuantity());
+        orderItem.setPrice(cartItem.getProduct().getPrice());
+        orderItem.setOrder(order);
+        return orderItem;
     }
 }

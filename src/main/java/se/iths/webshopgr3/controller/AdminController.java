@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import se.iths.webshopgr3.model.Product;
+import se.iths.webshopgr3.service.OrderService;
 import se.iths.webshopgr3.service.ProductService;
 
 @Controller
@@ -15,10 +16,12 @@ import se.iths.webshopgr3.service.ProductService;
 public class AdminController {
 
     private final ProductService productService;
+    private final OrderService orderService;
 
     @GetMapping
     public String listAllProducts(Model model) {
         model.addAttribute("allProducts", productService.getAllProducts());
+        model.addAttribute("allOrders", orderService.getAllOrders());
         return "admin";
     }
 

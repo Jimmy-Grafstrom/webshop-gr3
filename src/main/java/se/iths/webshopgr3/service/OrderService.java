@@ -2,12 +2,14 @@ package se.iths.webshopgr3.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import se.iths.lw.mailfunctionlibrary.service.MessageService;
 import se.iths.webshopgr3.model.AppUser;
 import se.iths.webshopgr3.model.Cart;
 import se.iths.webshopgr3.model.Order;
+import se.iths.webshopgr3.model.OrderItem;
 import se.iths.webshopgr3.repository.OrderRepository;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,19 +18,30 @@ import java.util.Optional;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final MessageService messageService;
+    private final OrderItemService orderItemService;
 
     /**
      * Creates a permanent Order in the database based on the content of a Cart.
-     * This is called by the CheckoutService when a purchase is finalized.
-     * Includes sending email confirmation as per project requirements (page 14).
+     * Mapping and persistence is handled here. Email confirmation and workflow
+     * orchestration should be handled by the CheckoutService.
      */
     public Order createOrder(Cart cart, AppUser user) {
-        // 1. Map Cart to Order and OrderItems
-        // 2. Save Order (cascades to OrderItems)
-        // 3. Send email via messageService.send(...)
-        
-        return new Order(); 
+        Order order = new Order();
+        order.setUsername(user.getUsername());
+        order.setTotalPrice(cart.getTotalPrice());
+        order.setOrderDate(LocalDateTime.now());
+
+        List<OrderItem> orderItems = new ArrayList<>();
+        cart.getCartItems().forEach(cartItem -> {
+            OrderItem orderItem = orderItemService.createOrderItem(cartItem, order);
+            orderItems.add(orderItem);
+        });
+        order.setOrderItems(orderItems);
+
+        Order savedOrder = orderRepository.save(order);
+        cart.clearCart();
+
+        return savedOrder;
     }
 
     public List<Order> getOrdersByUsername(String username) {
