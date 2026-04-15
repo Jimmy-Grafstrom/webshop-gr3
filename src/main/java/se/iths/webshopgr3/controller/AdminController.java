@@ -39,8 +39,7 @@ public class AdminController {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Product product = productService.getProductById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
+        Product product = productService.getProductById(id);
         model.addAttribute("product", product);
         return "edit-product";
     }

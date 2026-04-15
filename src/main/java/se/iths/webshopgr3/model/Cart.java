@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-//@Component
+@Component
 public class Cart {
 
     private List<CartItem> cartItems = new ArrayList<>();
@@ -24,10 +25,10 @@ public class Cart {
         for (CartItem product : cartItems) {
             if (product.getId().equals(cartItem.getId())) {
                 increaseQuantity(product);
-            } else {
-                cartItems.add(cartItem);
+                return;
             }
         }
+        cartItems.add(cartItem);
         updatePrice();
     }
 
