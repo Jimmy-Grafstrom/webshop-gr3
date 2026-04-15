@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.authority.FactorGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,31 +29,31 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, OttSuccessHandler ottSuccessHandler) throws Exception {
         http
-//                .csrf(csrf -> csrf
-//                        .ignoringRequestMatchers("/h2-console/**")
-//                )
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/h2-console/**")
+                )
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
-                );
-//                .authorizeHttpRequests((requests) -> requests
-//                        .requestMatchers("/", "/products/**", "/cart/**",
-//                                "/confirmation", "/h2-console/**", "/register",
-//                                "/css/**", "/js/**", "/cookie-policy", "/privacy-policy",
-//                                "/start", "/ott/sent", "/consent").permitAll()
-//                        .requestMatchers("/user").hasRole("USER") // prepared for user endpoint
-//                        .requestMatchers("/admin/**").hasRole("ADMIN") // Prepared for admin endpoint
-//                        .anyRequest()
-//                        .authenticated()
-//                )
-//                .formLogin(form -> form
-//                        .successHandler(authenticationSuccessHandler())
-//                        .permitAll()
-//                )
-//                .oneTimeTokenLogin(ott ->
-//                        ott.tokenGenerationSuccessHandler(
-//                                ottSuccessHandler
-//                        ))
-//                .logout(LogoutConfigurer::permitAll);
+                )
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/", "/products/**", "/cart/**",
+                                "/confirmation", "/h2-console/**", "/register",
+                                "/css/**", "/js/**", "/cookie-policy", "/privacy-policy",
+                                "/start", "/ott/sent", "/consent").permitAll()
+                        .requestMatchers("/user").hasRole("USER") // prepared for user endpoint
+                        .requestMatchers("/admin/**").hasRole("ADMIN") // Prepared for admin endpoint
+                        .anyRequest()
+                        .authenticated()
+                )
+                .formLogin(form -> form
+                        .successHandler(authenticationSuccessHandler())
+                        .permitAll()
+                )
+                .oneTimeTokenLogin(ott ->
+                        ott.tokenGenerationSuccessHandler(
+                                ottSuccessHandler
+                        ))
+                .logout(LogoutConfigurer::permitAll);
 
         return http.build();
     }
