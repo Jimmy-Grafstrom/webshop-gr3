@@ -7,6 +7,25 @@
 
 <h1>Cart</h1>
 
+<div th:if="${cart == null}">
+    <p>Cart is empty</p>
+</div>
+
+<div th:if="${cart != null}">
+    <p>There are items in the cart</p>
+    <p th:text="${cart.totalPrice}"></p>
+</div>
+
+
+<!-- Loop through products -->
+<th:block th:each="cartItem : ${cart}">
+    <table>
+        <tr>
+            <td th:text="${cart.cartItems}"></td>
+        </tr>
+    </table>
+</th:block>
+
 <!--Show products-->
 <!--Show total price-->
 <!--Button: confirm order -> checkout -> redirect?-->

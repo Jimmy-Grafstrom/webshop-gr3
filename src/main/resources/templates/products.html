@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Products</title>
 </head>
@@ -8,19 +8,25 @@
 <h1>Products 🛍️</h1>
 
 <!-- Loop through products -->
-<div th:each="product : ${products}">
+<th:block th:if="${products} != null" th:each="product : ${products}">
+    <table>
+        <tr>
+            <td th:src="${product.imageUrl}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.price}"></td>
+        </tr>
+    </table>
 
-    <p th:text="${product.name}"></p>
-    <p th:text="${product.price}"></p>
-
-    <!-- ✅ Add to cart button -->
-    <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
-        <button type="submit">Add to cart</button>
-    </form>
-
-</div>
-
+    <div>
+        <!-- ✅ Add to cart button -->
+        <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
+            <button type="submit">Add to cart</button>
+        </form>
+    </div>
+</th:block>
 <br>
+
 <a href="/cart">Go to Cart 🛒</a>
 
 </body>

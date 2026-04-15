@@ -25,10 +25,10 @@ public class Cart {
         for (CartItem product : cartItems) {
             if (product.getId().equals(cartItem.getId())) {
                 increaseQuantity(product);
-            } else {
-                cartItems.add(cartItem);
+                return;
             }
         }
+        cartItems.add(cartItem);
         updatePrice();
     }
 
