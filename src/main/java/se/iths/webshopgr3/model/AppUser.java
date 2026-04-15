@@ -39,4 +39,12 @@ public class AppUser {
     @NotBlank(message = "You must select a role")
     private String role;
 
+    @Override
+    public String toString() {
+        return
+                "id: " + id +"\n"+
+                " username: " + username + "\n" +
+                " cookies: " + consent + "\n"+
+                " role: " + role + "\n" ;
+    }
 }
