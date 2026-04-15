@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<div th:replace="~{fragments/header::header}"></div>
+
+<h1>Profile</h1>
+<p>Username: <span th:text="${username}"></span></p>
+<!--
+<p>Password: <span th:text="${password}"></span></p>
+-->
+<p>Agree cookie policy <span th:text="${cookies}? 'Yes':'No'"></span></p>
+<p>Role: <span th:text="${role}"></span></p>
+
+<form th:action="@{/user/delete}" method="post" onsubmit="return confirmDelete()">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+    <input type="hidden" name ="username" th:value="${username}">
+  <button type="submit">Delete Account</button>
+</form>
+<form th:action="@{/user/profile/email}" method="post" style="margin-top: 10px;">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+    <button type="submit" onclick="return confirm('Send your account information to your E-mail?')"> Send Account Information to My Email</button>
+ </form>
+<script>
+  function confirmDelete(){
+    return confirm("You will not be able to revert this! Are you sure you want to delete the account?")
+  }
+</script>
+
+<div th:replace="fragments/footer::footer"></div>
+
+</body>
+</html>

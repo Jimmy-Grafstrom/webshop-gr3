@@ -36,7 +36,6 @@ public class DataInitializer implements CommandLineRunner {
             admin.setRole("ADMIN");
             appUserRepository.save(admin);
         }
-
     }
 }
 
