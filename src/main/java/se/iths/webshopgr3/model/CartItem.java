@@ -9,11 +9,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CartItem {
 
-    private int id;
+    private Long id;
     private Product product;
     private int quantity;
 
     public CartItem(Product product) {
+        this.id = product.getId();
         this.product = product;
         this.quantity = 1;
     }
