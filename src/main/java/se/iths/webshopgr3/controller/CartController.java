@@ -10,11 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import se.iths.webshopgr3.model.AppUser;
 import se.iths.webshopgr3.model.Cart;
 import se.iths.webshopgr3.model.Order;
-import se.iths.webshopgr3.model.OrderItem;
 import se.iths.webshopgr3.service.OrderItemService;
 import se.iths.webshopgr3.service.OrderService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/cart")
@@ -40,7 +37,6 @@ public class CartController {
     @GetMapping
     private String redirectToCheckout(@ModelAttribute AppUser user, @ModelAttribute Cart cart, Model model) {
         Order order = new Order();
-        order.getOrderItems() = (List<OrderItem>) cart.getCartItems();
 
         //Create order
         //Add orderItems to order
