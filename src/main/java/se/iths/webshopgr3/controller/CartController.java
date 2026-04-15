@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import se.iths.webshopgr3.model.Cart;
 import se.iths.webshopgr3.service.ProductService;
@@ -21,9 +22,9 @@ public class CartController {
         return "cart";
     }
 
-    @GetMapping
+    @PostMapping
     public String printProducts(Model model) {
-        model.addAttribute("cart", cart);
+        model.addAttribute("cart", cart.getAllProductsInCart());
         return "cart";
     }
 

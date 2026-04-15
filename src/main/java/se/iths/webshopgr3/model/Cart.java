@@ -1,7 +1,9 @@
 package se.iths.webshopgr3.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -11,6 +13,8 @@ import java.util.List;
 @SessionScope
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Component
 public class Cart {
 
@@ -18,14 +22,14 @@ public class Cart {
     private double totalPrice;
 
     public void addProductToCart(CartItem cartItem) {
-
         for (CartItem product : cartItems) {
-            if (product.getId() == cartItem.getId()) {
+            if (product.getId().equals(cartItem.getId())) {
                 increaseQuantity(product);
             } else {
                 cartItems.add(cartItem);
             }
         }
+        updatePrice();
     }
 
     public List<CartItem> getAllProductsInCart() {
@@ -41,9 +45,5 @@ public class Cart {
 
     public void increaseQuantity(CartItem itemInCart) {
         itemInCart.setQuantity(itemInCart.getQuantity() + 1);
-    }
-
-    public void clearCart() {
-        cartItems.clear();
     }
 }
