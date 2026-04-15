@@ -46,4 +46,8 @@ public class Cart {
     public void increaseQuantity(CartItem itemInCart) {
         itemInCart.setQuantity(itemInCart.getQuantity() + 1);
     }
+
+    public void clearCart() {
+        cartItems.clear();
+    }
 }
