@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     boolean existsByUsername(String username);
     Optional<AppUser> findByUsername(String username);
+    void deleteByUsername(String username);
 
 }

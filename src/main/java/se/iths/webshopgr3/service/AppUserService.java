@@ -27,4 +27,11 @@ public class AppUserService {
         appUserRepository.save(user);
     }
 
+    public void deleteUser(String username){
+
+        appUserRepository.deleteByUsername(username);
+    }
+
+
+
 }

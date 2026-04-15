@@ -47,7 +47,7 @@ public class SecurityConfig {
                                         "/confirmation", "/h2-console/**", "/register",
                                         "/css/**", "/js/**", "/cookie-policy", "/privacy-policy", "/start", "/ott/sent", "/consent").permitAll()
 
-                                .requestMatchers("/user").hasRole("USER") // prepared for user endpoint
+                                .requestMatchers("/user/**").hasRole("USER") // prepared for user endpoint
                                 .requestMatchers("/admin/**").hasRole("ADMIN") // Prepared for admin endpoint
                                 .anyRequest()
                                 .authenticated()
