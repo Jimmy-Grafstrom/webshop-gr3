@@ -18,6 +18,7 @@
         <p th:if="${#fields.hasErrors()}"></p>
         <p th:if="${#fields.hasErrors('username')}"></p>
         <p th:if="${#fields.hasErrors('password')}"></p>
+
     </div>
 
     <div>
@@ -36,9 +37,18 @@
     </div>
 
     <div>
+        <label for="role">Role</label>
+        <select  id="role" th:field="*{role}">
+            <option value="ADMIN">ADMIN</option>
+            <option value="USER">USER</option>
+        </select>
+
+    </div>
+
+    <div>
         <label>
             By checking this box you agree to our privacy policy in terms of handling your personal information.
-            <input type="checkbox" required="required">
+            <input type="checkbox" name="consent">
         </label>
     </div>
 

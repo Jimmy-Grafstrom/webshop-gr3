@@ -24,7 +24,6 @@ public class Cart {
                 items.add(cartItem);
             }
         }
-        updatePrice();
     }
 
     public List<CartItem> getAllProductsInCart() {

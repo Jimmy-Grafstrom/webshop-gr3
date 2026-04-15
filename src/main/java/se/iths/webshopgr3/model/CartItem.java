@@ -9,6 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CartItem {
 
+    private int id;
     private Product product;
     private int quantity;
 
@@ -16,14 +17,5 @@ public class CartItem {
         this.product = product;
         this.quantity = 1;
     }
-
-    public void increaseQuantity() {
-        this.quantity++;
-    }
-
-    public double getTotalPrice() {
-        double total = product.getPrice() * quantity;
-        return total;
-    }
-    }
+}
 
