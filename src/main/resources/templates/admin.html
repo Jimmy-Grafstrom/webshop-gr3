@@ -50,6 +50,38 @@
         </tr>
         </tbody>
     </table>
+
+    <hr>
+
+    <h2>Order Management</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Total Price</th>
+            <th>Order Date</th>
+            <th>Items</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${allOrders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.username}"></td>
+            <td th:text="${order.totalPrice}"></td>
+            <td th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td>
+                <ul>
+                    <li th:each="item : ${order.orderItems}">
+                        <span th:text="${item.productName}"></span> x
+                        <span th:text="${item.quantity}"></span>
+                        (<span th:text="${item.price}"></span> SEK)
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </main>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>
