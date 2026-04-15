@@ -15,7 +15,7 @@
 <p>Agree cookie policy <span th:text="${cookies}? 'Yes':'No'"></span></p>
 <p>Role: <span th:text="${role}"></span></p>
 
-<form th:action="@{user/delete}" method="post" onsubmit="return confirmDelete()">
+<form th:action="@{/user/delete}" method="post" onsubmit="return confirmDelete()">
     <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
     <input type="hidden" name ="username" th:value="${username}">
   <button type="submit">Delete Account</button>

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.iths.webshopgr3.model.AppUser;
 import se.iths.webshopgr3.repository.AppUserRepository;
 import se.iths.lw.mailfunctionlibrary.service.MessageService;
@@ -36,7 +37,7 @@ public class AppUserService {
                 .orElseThrow(()->new UsernameNotFoundException("Username not found " + username));
     }
 
-
+    @Transactional
     public void deleteUser(String username){
 
         appUserRepository.deleteByUsername(username);
