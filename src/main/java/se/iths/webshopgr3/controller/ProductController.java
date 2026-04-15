@@ -18,7 +18,7 @@ import se.iths.webshopgr3.service.ProductService;
 public class ProductController {
 
     private final ProductService productService;
-    private final Cart cart;
+//    private final Cart cart;
 
     @GetMapping()
     public String showProducts(Model model) {
