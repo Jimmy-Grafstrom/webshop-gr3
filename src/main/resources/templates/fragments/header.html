@@ -1,37 +1,15 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/static/css/header-style.css}"/>
-</head>
-<body>
-
 <header th:fragment="header">
-    <h1>Webshop</h1>
-    <nav>
-        <button>
-            <a th:href="@{/}">Home</a>
-        </button>
+    <div class="navbar">
 
-        <!--        <a th:href="@{/}">Products</a>-->
-
-        <div class="header-buttons">
-            <div sec:authorize="!isAuthenticated()">
-                <button>
-                    <a th:href="@{/register}">Register</a>
-                </button>
-                <button>
-                    <a th:href="@{/login}">Log in</a>
-                </button>
-            </div>
-
-            <button sec:authorize="!isAnonymous()">
-                <a th:href="@{/logout}">Log out</a>
-            </button>
+        <div class="nav-left">
+            <h1>Webshop</h1>
         </div>
-    </nav>
-</header>
 
-</body>
-</html>
+        <div class="nav-right">
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/register}">Register</a>
+            <a th:href="@{/login}">Log in</a>
+        </div>
+
+    </div>
+</header>
