@@ -21,12 +21,12 @@ import se.iths.lw.mailfunctionlibrary.service.MessageService;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@EnableMultiFactorAuthentication(
-        authorities = {
-                FactorGrantedAuthority.PASSWORD_AUTHORITY,
-                FactorGrantedAuthority.OTT_AUTHORITY
-        }
-)
+//@EnableMultiFactorAuthentication(
+//        authorities = {
+//                FactorGrantedAuthority.PASSWORD_AUTHORITY,
+//                FactorGrantedAuthority.OTT_AUTHORITY
+//        }
+//)
 public class SecurityConfig {
 
     @Bean
@@ -44,7 +44,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                                 .requestMatchers("/", "/products/**", "/cart/**",
                                         "/confirmation", "/h2-console/**", "/register",
-                                        "/css/**", "/js/**", "/cookie-policy", "/privacy-policy", "/start", "/ott/sent", "/consent").permitAll()
+                                        "/css/**", "/js/**", "/cookie-policy", "/privacy-policy",
+                                        "/start", "/ott/sent", "/consent").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasAnyRole("USER","ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 )
