@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main style="text-align: center; padding: 50px;">
+        <h1>Thank you for your order! ✅</h1>
+        <p>Your purchase was successful and is being processed.</p>
+        <p>A confirmation email has been sent to your registered address.</p>
+        
+        <br>
+        <a th:href="@{/products}">Continue Shopping</a>
+        <br>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer; padding: 0; font: inherit;">Log out</button>
+        </form>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

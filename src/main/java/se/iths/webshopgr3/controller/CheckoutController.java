@@ -68,10 +68,10 @@ public class CheckoutController {
         return "redirect:/login";
     }
 
-    Order newOrder = orderService.createOrder(cart, appUser);
-    httpSession.removeAttribute("cart");
-    model.addAttribute("order", newOrder);
-    return "orderConfirmation";
+        Order newOrder = orderService.createOrder(cart, appUser);
+        httpSession.removeAttribute("cart");
+        model.addAttribute("order", newOrder);
+        return "order-confirmation";
 
 
     }
