@@ -45,9 +45,6 @@ public class SecurityConfig {
                                 .requestMatchers("/", "/products/**", "/cart/**",
                                         "/confirmation", "/h2-console/**", "/register",
                                         "/css/**", "/js/**", "/cookie-policy", "/privacy-policy", "/start", "/ott/sent", "/consent").permitAll()
-
-                                //.requestMatchers("/user/**").hasRole("USER") // prepared for user endpoint 到时候记得还原
-                                //.requestMatchers("/admin/**").hasRole("ADMIN") // Prepared for admin endpoint 到时候记得还原
                                 .anyRequest()
                                 .authenticated()
                 )
@@ -64,22 +61,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    //TODO recover theAuthenticationSuccessHandler below  if necessary.
-/*
-    @Bean
-    public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return (request, response, authentication) -> {
-            var authorities = authentication.getAuthorities();
-            boolean isAdmin = authorities.stream()
-                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-            if (isAdmin) {
-                response.sendRedirect("/admin");
-            } else {
-                response.sendRedirect("/");
-            }
-        };
-    }
-*/
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -91,7 +72,6 @@ public class SecurityConfig {
         return new RedirectOneTimeTokenGenerationSuccessHandler("/ott/sent");
     }
 
-    //============================================================================
 
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
@@ -99,7 +79,5 @@ public class SecurityConfig {
             request.getRequestDispatcher("/login/ott").forward(request,response);
         };
     }
-
-
 
 }
