@@ -18,7 +18,7 @@ public class AppUserService {
     private final PasswordEncoder passwordEncoder;
     private final MessageService messageService;
 
-    public void saveUser(AppUser user) {
+    public AppUser saveUser(AppUser user) {
 
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
@@ -27,9 +27,7 @@ public class AppUserService {
             user.setRole("USER");
         }
 
-        appUserRepository.save(user);
-
-
+        return appUserRepository.save(user);
     }
 
     public AppUser findByUsername(String username){
