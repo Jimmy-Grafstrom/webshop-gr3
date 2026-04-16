@@ -21,12 +21,12 @@ import se.iths.lw.mailfunctionlibrary.service.MessageService;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@EnableMultiFactorAuthentication(
-        authorities = {
-                FactorGrantedAuthority.PASSWORD_AUTHORITY,
-                FactorGrantedAuthority.OTT_AUTHORITY
-        }
-)
+//@EnableMultiFactorAuthentication(
+//        authorities = {
+//                FactorGrantedAuthority.PASSWORD_AUTHORITY,
+//                FactorGrantedAuthority.OTT_AUTHORITY
+//        }
+//)
 public class SecurityConfig {
 
     @Bean

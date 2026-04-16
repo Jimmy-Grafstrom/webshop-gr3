@@ -3,40 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 
 <div th:replace="fragments/header::header"></div>
 
-<div th:if="${cookieFeedback}"
-     style="background-color: #d4edda; color: #155724; padding: 15px; text-align: center; border-bottom: 1px solid #c3e6cb;">
+<div th:if="${cookieFeedback}" class="cookie-success">
     <p th:text="${cookieFeedback}"></p>
 </div>
 
-<div th:if="${!hasConsent}" id="cookie-banner"
-     style="background-color: #f1f1f1; padding: 20px; text-align: center; border-bottom: 1px solid #ccc;">
+<div th:if="${!hasConsent}" id="cookie-banner">
     <p>Vi använder cookies för att förbättra din upplevelse på vår webbplats.</p>
     <form th:action="@{/consent}" method="post">
-        <button type="submit">Acceptera cookies</button>
+        <button type="submit" class="btn">Acceptera cookies</button>
     </form>
 </div>
 
-<h1>Welcome to the Webshop</h1>
+<div class="container">
 
-<div>
-    <button>
-        <a th:href="@{/login}">Login</a>
-    </button>
-    <button>
-        <a th:href="@{/register}">Sign up</a>
-    </button>
-    <button>
-        <a th:href="@{/logout}">Logout</a>
-    </button>
+    <h1>Welcome to the Webshop</h1>
+
+    <div>
+        <a th:href="@{/login}" class="btn">Login</a>
+        <a th:href="@{/register}" class="btn">Sign up</a>
+        <a th:href="@{/logout}" class="btn">Logout</a>
+    </div>
+
 </div>
 
 <div th:replace="fragments/footer::footer"></div>
-
 
 </body>
 </html>
