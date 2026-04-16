@@ -1,5 +1,6 @@
 package se.iths.webshopgr3.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authorization.EnableMultiFactorAuthentication;
@@ -14,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.ott.RedirectOneTimeTokenGenerationSuccessHandler;
+import se.iths.lw.mailfunctionlibrary.service.MessageService;
+
 
 @Configuration
 @EnableWebSecurity
@@ -27,7 +30,10 @@ import org.springframework.security.web.authentication.ott.RedirectOneTimeTokenG
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, OttSuccessHandler ottSuccessHandler) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                                   OttSuccessHandler ottSuccessHandler,
+                                                   MessageService messageService,
+                            AuthenticationSuccessHandler authenticationSuccessHandler) throws Exception {
         http
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/h2-console/**")
@@ -39,14 +45,11 @@ public class SecurityConfig {
                                 .requestMatchers("/", "/products/**", "/cart/**",
                                         "/confirmation", "/h2-console/**", "/register",
                                         "/css/**", "/js/**", "/cookie-policy", "/privacy-policy", "/start", "/ott/sent", "/consent").permitAll()
-
-                                .requestMatchers("/user/**").hasRole("USER") // prepared for user endpoint
-                                .requestMatchers("/admin/**").hasRole("ADMIN") // Prepared for admin endpoint
                                 .anyRequest()
                                 .authenticated()
                 )
                 .formLogin(form -> form
-                        .successHandler(authenticationSuccessHandler())
+                        .successHandler(authenticationSuccessHandler)
                         .permitAll()
                 )
                 .oneTimeTokenLogin(ott ->
@@ -59,20 +62,6 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return (request, response, authentication) -> {
-            var authorities = authentication.getAuthorities();
-            boolean isAdmin = authorities.stream()
-                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-            if (isAdmin) {
-                response.sendRedirect("/admin");
-            } else {
-                response.sendRedirect("/");
-            }
-        };
-    }
-
-    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -82,4 +71,13 @@ public class SecurityConfig {
     public RedirectOneTimeTokenGenerationSuccessHandler redirectOneTimeTokenGenerationSuccessHandler() {
         return new RedirectOneTimeTokenGenerationSuccessHandler("/ott/sent");
     }
+
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return (request, response, authentication)->{
+            request.getRequestDispatcher("/login/ott").forward(request,response);
+        };
+    }
+
 }
