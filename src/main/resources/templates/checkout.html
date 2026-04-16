@@ -10,9 +10,23 @@
         .total { text-align: right; margin-right: 10%; font-size: 1.2em; }
         .buttons { text-align: center; margin-top: 20px; }
         button, .btn { padding: 8px 20px; font-size: 1em; margin: 0 10px; cursor: pointer;}
+        .alert {
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 5px;
+            text-align: center;
+            width: 80%;
+        }
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
     </style>
 </head>
 <body>
+<div th:replace="~{fragments/header::header}"></div>
+
 <div th:if="${errorMessage}" class="alert alert-warning" th:text="${errorMessage}">
 
 
@@ -54,6 +68,8 @@
         <button type="submit">Confirm the order</button>
     </form>
 </div>
+
+<div th:replace="fragments/footer::footer"></div>
 
 </body>
 </html>
