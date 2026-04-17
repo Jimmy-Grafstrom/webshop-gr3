@@ -3,61 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign up</title>
+
+    <!-- ✅ shared CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 
-<div th:replace="~{fragments/header::header}"></div>
+<!-- header -->
+<div th:replace="fragments/header::header"></div>
 
-<h1>Sign up</h1>
-<p>Sign up and become one of our members!</p>
+<div class="container">
 
+    <h1>Sign up</h1>
+    <p>Sign up and become one of our members!</p>
 
-<form th:action="@{/register}" th:object="${user}" method="post">
+    <form th:action="@{/register}" th:object="${user}" method="post">
 
-    <div class="error-message-div">
-        <p th:if="${#fields.hasErrors()}"></p>
-        <p th:if="${#fields.hasErrors('username')}"></p>
-        <p th:if="${#fields.hasErrors('password')}"></p>
+        <div class="error-message-div">
+            <p th:if="${#fields.hasErrors()}"></p>
+            <p th:if="${#fields.hasErrors('username')}"></p>
+            <p th:if="${#fields.hasErrors('password')}"></p>
+        </div>
 
-    </div>
+        <div>
+            <label>
+                Username
+                <input type="text" name="username" placeholder="Username">
+            </label>
+        </div>
 
-    <div>
-        <label>
-            Username
-            <input type="text" name="username" placeholder="Username">
-        </label>
-    </div>
+        <div>
+            <label>
+                Password
+                <input type="password" name="password" placeholder="Password">
+            </label>
+        </div>
 
-    <div>
+        <div>
+            <label for="role">Role</label>
+            <select id="role" th:field="*{role}">
+                <option value="ADMIN">ADMIN</option>
+                <option value="USER">USER</option>
+            </select>
+        </div>
 
-        <label>
-            Password
-            <input type="password" name="password" placeholder="Password">
-        </label>
-    </div>
+        <div>
+            <label>
+                By checking this box you agree to our privacy policy.
+                <input type="checkbox" name="consent">
+            </label>
+        </div>
 
-    <div>
-        <label for="role">Role</label>
-        <select  id="role" th:field="*{role}">
-            <option value="ADMIN">ADMIN</option>
-            <option value="USER">USER</option>
-        </select>
+        <!-- ✅ consistent button -->
+        <button type="submit" class="btn">Sign up</button>
 
-    </div>
+    </form>
 
-    <div>
-        <label>
-            By checking this box you agree to our privacy policy in terms of handling your personal information.
-            <input type="checkbox" name="consent">
-        </label>
-    </div>
+</div>
 
-    <button type="submit">Sign up</button>
-
-</form>
-
+<!-- footer -->
 <div th:replace="fragments/footer::footer"></div>
 
 </body>
-
 </html>

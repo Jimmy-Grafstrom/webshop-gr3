@@ -1,35 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Products</title>
-    
+
+    <!-- ✅ Same CSS as all pages -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 
-<h1>Products 🛍️</h1>
+<!-- ✅ Header -->
+<div th:replace="fragments/header::header"></div>
+
+<div class="container">
+
+    <h1>Products 🛍️</h1>
+
+    <!-- If no products -->
+    <div th:if="${products == null || products.isEmpty()}">
+        <p>No products available.</p>
+    </div>
+
+    <!-- Product list -->
+    <div class="product-list" th:if="${products != null}">
+
+        <div class="product-card" th:each="product : ${products}">
+
+            <!-- ✅ Image -->
+            <img th:src="${product.imageUrl}" alt="Product image" width="150">
+
+            <h3 th:text="${product.name}"></h3>
+
+            <p th:text="${product.category}"></p>
+
+            <p><strong th:text="${product.price}"></strong> SEK</p>
+
+            <!-- Add to cart -->
+            <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
+                <button type="submit" class="btn">Add to cart</button>
+            </form>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <a th:href="@{/cart}" class="btn">Go to Cart 🛒</a>
 
 </div>
-<!-- Loop through products -->
-<th:block th:if="${products} != null" th:each="product : ${products}">
-    <table>
-        <tr>
-            <td th:src="${product.imageUrl}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.category}"></td>
-            <td th:text="${product.price}"></td>
-        </tr>
-    </table>
 
-    <div>
-        <!-- ✅ Add to cart button -->
-        <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
-            <button type="submit">Add to cart</button>
-        </form>
-    </div>
-</th:block>
-<br>
-
-<a href="/cart">Go to Cart 🛒</a>
+<!-- ✅ Footer -->
+<div th:replace="fragments/footer::footer"></div>
 
 </body>
 </html>

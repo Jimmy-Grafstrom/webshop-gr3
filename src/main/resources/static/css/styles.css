@@ -101,3 +101,56 @@ h1 {
     background-color: #0056b3;
     transform: translateY(-2px);
 }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #F5CAC3;
+}
+.product-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    width: 200px;
+    text-align: center;
+}
+
+.product-card img {
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+form div {
+    margin: 15px 0;
+}
+
+input {
+    padding: 8px;
+    width: 100%;
+    max-width: 300px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form p {
+    color: red;
+    font-size: 12px;
+}
