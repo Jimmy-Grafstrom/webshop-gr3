@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import se.iths.webshopgr3.model.*;
 import se.iths.webshopgr3.repository.OrderRepository;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 class OrderServiceTest {
@@ -62,6 +64,12 @@ class OrderServiceTest {
     @Test
     @DisplayName("Order is not retrieved due to username being incorrect")
     void orderIsNotRetrievedDueToInvalidUsername() {
+        Order order = orderService.createOrder(testCart, testUser);
+
+        List<Order> expectedOrder = List.of(order);
+        List<Order> orderReturned = orderService.getOrdersByUsername("test2");
+
+        Assertions.assertNotEquals(expectedOrder, orderReturned);
 
     }
 
@@ -69,23 +77,42 @@ class OrderServiceTest {
     @Test
     @DisplayName("All orders can be retrieved")
     void getAllOrders() {
-
-        List<Order> ordersRecieved = orderService.getAllOrders();
-        Assertions.assertNotNull(ordersRecieved);
-
-
+        List<Order> ordersReceived = orderService.getAllOrders();
+        Assertions.assertNotNull(ordersReceived);
     }
 
     @Test
     @DisplayName("An order can be found using its id")
     void getOrderById() {
+        Order order = orderService.createOrder(testCart, testUser);
 
+        List<Order> orderReceived = Collections.singletonList(orderService.getOrderById(order.getId()).orElseThrow());
 
+        Assertions.assertNotNull(orderReceived);
     }
+
+    @Test
+    @DisplayName("An order can be found using its id")
+    void getOrderByIdReturnsCorrectData() {
+        Order order = orderService.createOrder(testCart, testUser);
+
+        List<Order> expectedOrder = List.of(order);
+
+        List<Order> orderReceived = Collections.singletonList(orderService.getOrderById(order.getId()).orElseThrow());
+        Assertions.assertEquals(expectedOrder, orderReceived);
+    }
+
 
     @Test
     @DisplayName("Orders with invalid id is not returned")
     void orderNotReturnedDueToIncorrectId() {
+
+        Order order = orderService.createOrder(testCart, testUser);
+
+        Optional<Order> orderReceived = orderService.getOrderById(8L);
+
+        Assertions.assertEquals(Optional.empty(), orderReceived);
+
 
     }
 }
