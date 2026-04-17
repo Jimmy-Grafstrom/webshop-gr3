@@ -1,14 +1,32 @@
-<header th:fragment="header">
+<header th:fragment="header" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <div class="navbar">
 
         <div class="nav-left">
-            <h1>Webshop</h1>
+            <a th:href="@{/}" style="color: white; text-decoration: none;">
+                <h2>Webshop</h2>
+            </a>
         </div>
 
         <div class="nav-right">
             <a th:href="@{/}">Home</a>
-            <a th:href="@{/register}">Register</a>
-            <a th:href="@{/login}">Log in</a>
+            <a th:href="@{/products}">Products</a>
+            <a th:href="@{/cart}">Cart 🛒</a>
+
+            <span sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/profile}">Profile</a>
+                <a th:href="@{/checkout}">Checkout</a>
+                <span sec:authorize="hasRole('ADMIN')">
+                    <a th:href="@{/admin}">Admin</a>
+                </span>
+                <form th:action="@{/logout}" method="post" style="display: inline; margin-left: 15px;">
+                    <button type="submit" style="background: none; border: none; color: white; cursor: pointer; font-family: inherit; font-size: inherit; font-weight: 500; padding: 0;">Logout</button>
+                </form>
+            </span>
+
+            <span sec:authorize="isAnonymous()">
+                <a th:href="@{/register}">Register</a>
+                <a th:href="@{/login}">Log in</a>
+            </span>
         </div>
 
     </div>

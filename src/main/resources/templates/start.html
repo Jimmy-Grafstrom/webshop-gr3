@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
@@ -24,10 +24,20 @@
 
     <h1>Welcome to the Webshop</h1>
 
-    <div>
-        <a th:href="@{/login}" class="btn">Login</a>
-        <a th:href="@{/register}" class="btn">Sign up</a>
-        <a th:href="@{/logout}" class="btn">Logout</a>
+    <div sec:authorize="isAnonymous()">
+        <p>Please log in or sign up to start shopping.</p>
+        <div style="margin-top: 20px;">
+            <a th:href="@{/login}" class="btn">Login</a>
+            <a th:href="@{/register}" class="btn">Sign up</a>
+        </div>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <p>Welcome back, <span sec:authentication="name">User</span>!</p>
+        <div style="margin-top: 20px;">
+            <a th:href="@{/products}" class="btn">Start Shopping</a>
+            <a th:href="@{/user/profile}" class="btn">My Profile</a>
+        </div>
     </div>
 
 </div>
