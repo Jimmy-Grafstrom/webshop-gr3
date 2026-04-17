@@ -32,7 +32,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    OttSuccessHandler ottSuccessHandler,
-                                                   MessageService messageService,
                             AuthenticationSuccessHandler authenticationSuccessHandler) throws Exception {
         http
                 .csrf(csrf -> csrf
@@ -44,7 +43,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                                 .requestMatchers("/", "/products/**", "/cart/**",
                                         "/confirmation", "/h2-console/**", "/register",
-                                        "/css/**", "/js/**", "/cookie-policy", "/privacy-policy", "/start", "/ott/sent", "/consent").permitAll()
+                                        "/css/**", "/js/**", "/cookie-policy", "/privacy-policy",
+                                        "/start", "/ott/sent", "/consent").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasAnyRole("USER","ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 )

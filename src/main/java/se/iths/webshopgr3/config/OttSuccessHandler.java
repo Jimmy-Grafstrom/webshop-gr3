@@ -27,7 +27,9 @@ public class OttSuccessHandler implements OneTimeTokenGenerationSuccessHandler {
     }
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, OneTimeToken oneTimeToken) throws IOException, ServletException {
+    public void handle(HttpServletRequest request,
+                       HttpServletResponse response,
+                       OneTimeToken oneTimeToken) throws IOException, ServletException {
         String link = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/login/ott")
                 .queryParam("token", oneTimeToken.getTokenValue())
@@ -37,6 +39,10 @@ public class OttSuccessHandler implements OneTimeTokenGenerationSuccessHandler {
         email.setRecipient(request.getParameter("username"));
         email.setMessage(link);
         email.setSubject("One time token link");
+        
+        // Print the link to console for development testing since no SMTP server is configured
+        System.out.println("DEBUG: Login link -> " + link);
+        
         messageService.send(email);
         redirectOneTimeTokenGenerationSuccessHandler.handle(request, response, oneTimeToken);
 

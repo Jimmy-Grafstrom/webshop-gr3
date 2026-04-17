@@ -51,7 +51,8 @@ public class AppUserController {
         String username = currentUser.getUsername();
         appUserService.sendAccountInfoToEmail(username);
 
-        redirectAttributes.addFlashAttribute("successMessage","Account information has been sent to your E-mail.");
+        redirectAttributes.addFlashAttribute("successMessage",
+                "Account information has been sent to your E-mail.");
 
         return "redirect:/user/profile";
     }

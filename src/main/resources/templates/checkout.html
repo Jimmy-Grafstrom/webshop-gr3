@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <style>
+        table { border-collapse: collapse; width: 80%; margin: 20px auto; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        .total { text-align: right; margin-right: 10%; font-size: 1.2em; }
+        .buttons { text-align: center; margin-top: 20px; }
+        button, .btn { padding: 8px 20px; font-size: 1em; margin: 0 10px; cursor: pointer;}
+        .alert {
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 5px;
+            text-align: center;
+            width: 80%;
+        }
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="~{fragments/header::header}"></header>
+
+<div th:if="${errorMessage}" class="alert alert-warning" th:text="${errorMessage}">
+
+
+</div>
+<h2 style="text-align:center">Checkout</h2>
+
+<div th:if="${cart == null or cart.allProductsInCart.isEmpty()}">
+    <p style="text-align:center">Your shopping cart is empty. Please go to <a href="/products"> add products</a></p>
+</div>
+
+<div th:unless="${cart == null or cart.allProductsInCart.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item:${cart.allProductsInCart}">
+                <td th:text="${item.product.name}">Product</td>
+                <td> <span th:text="${item.product.price}">0.00</span> kr</td>
+                <td th:text="${item.quantity}">0</td>
+                <td><span th:text="${item.product.price*item.quantity}">0.00</span> kr</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="total">
+        <strong>Total</strong>
+        <span th:text="${totalPrice}">0.00</span> kr
+    </div>
+</div>
+
+<div class="buttons">
+    <a href="/products" class="btn">Continue shopping</a>
+    <form th:action="@{/checkout}" method="post" style="display:inline;">
+        <button type="submit">Confirm the order</button>
+    </form>
+</div>
+
+<br>
+<br>
+<br>
+<footer th:replace="fragments/footer::footer"></footer>
+
+</body>
+</html>
