@@ -37,4 +37,16 @@ public class Product {
     @Column(nullable = false, name = "image_url")
     @NotBlank(message = "Image URL is required")
     private String imageUrl;
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", category='" + category + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }

@@ -2,25 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Products</title>
-    <style>
-        .alert {
-            padding: 15px;
-            margin: 10px auto;
-            border-radius: 5px;
-            text-align: center;
-            width: 80%;
-        }
-        .alert-warning {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeeba;
-        }
-    </style>
+    
 </head>
 <body>
 
 <h1>Products 🛍️</h1>
-<div th:if="${errorMessage}" class="alert alert-warning" th:text="${errorMessage}">
 
 </div>
 <!-- Loop through products -->

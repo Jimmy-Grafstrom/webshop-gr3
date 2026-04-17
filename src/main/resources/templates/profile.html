@@ -5,7 +5,7 @@
     <title>Profile</title>
 </head>
 <body>
-<div th:replace="~{fragments/header::header}"></div>
+<header th:replace="~{fragments/header::header}"></header>
 
 <h1>Profile</h1>
 <p>Username: <span th:text="${username}"></span></p>
@@ -33,7 +33,10 @@
   }
 </script>
 
-<div th:replace="fragments/footer::footer"></div>
+<br>
+<br>
+
+<footer th:replace="fragments/footer::footer"></footer>
 
 </body>
 </html>

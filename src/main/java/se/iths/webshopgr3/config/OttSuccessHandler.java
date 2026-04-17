@@ -27,7 +27,9 @@ public class OttSuccessHandler implements OneTimeTokenGenerationSuccessHandler {
     }
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, OneTimeToken oneTimeToken) throws IOException, ServletException {
+    public void handle(HttpServletRequest request,
+                       HttpServletResponse response,
+                       OneTimeToken oneTimeToken) throws IOException, ServletException {
         String link = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/login/ott")
                 .queryParam("token", oneTimeToken.getTokenValue())

@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class Cart {
         for (CartItem product : cartItems) {
             if (product.getId().equals(cartItem.getId())) {
                 increaseQuantity(product);
+                updatePrice();
                 return;
             }
         }
@@ -41,6 +44,9 @@ public class Cart {
         for (CartItem product : cartItems) {
             totalPrice += product.getQuantity() * product.getProduct().getPrice();
         }
+
+        BigDecimal bigDecimal = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
+        totalPrice = bigDecimal.doubleValue();
     }
 
     public void increaseQuantity(CartItem itemInCart) {

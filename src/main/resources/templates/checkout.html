@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-<div th:replace="~{fragments/header::header}"></div>
+<header th:replace="~{fragments/header::header}"></header>
 
 <div th:if="${errorMessage}" class="alert alert-warning" th:text="${errorMessage}">
 
@@ -50,15 +50,15 @@
         <tbody>
             <tr th:each="item:${cart.allProductsInCart}">
                 <td th:text="${item.product.name}">Product</td>
-                <td th:text="${item.product.price}">0.00</td>
-                <td th:text="${item.quantity}">1</td>
-                <td th:text="${item.product.price*item.quantity}">0.00</td>
+                <td> <span th:text="${item.product.price}">0.00</span> kr</td>
+                <td th:text="${item.quantity}">0</td>
+                <td><span th:text="${item.product.price*item.quantity}">0.00</span> kr</td>
             </tr>
         </tbody>
     </table>
     <div class="total">
         <strong>Total</strong>
-        <span th:text="${totalPrice}">0.00</span>
+        <span th:text="${totalPrice}">0.00</span> kr
     </div>
 </div>
 
@@ -69,7 +69,10 @@
     </form>
 </div>
 
-<div th:replace="fragments/footer::footer"></div>
+<br>
+<br>
+<br>
+<footer th:replace="fragments/footer::footer"></footer>
 
 </body>
 </html>
