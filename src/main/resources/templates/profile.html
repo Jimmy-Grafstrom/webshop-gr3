@@ -20,10 +20,13 @@
     <input type="hidden" name ="username" th:value="${username}">
   <button type="submit">Delete Account</button>
 </form>
+
 <form th:action="@{/user/profile/email}" method="post" style="margin-top: 10px;">
     <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
-    <button type="submit" onclick="return confirm('Send your account information to your E-mail?')"> Send Account Information to My Email</button>
+    <button type="submit" onclick="return confirm('Send your account information to your E-mail?')">
+        Send Account Information to My Email</button>
  </form>
+
 <script>
   function confirmDelete(){
     return confirm("You will not be able to revert this! Are you sure you want to delete the account?")

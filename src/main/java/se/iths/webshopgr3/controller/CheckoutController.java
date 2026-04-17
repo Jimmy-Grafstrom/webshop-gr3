@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import se.iths.webshopgr3.model.AppUser;
 import se.iths.webshopgr3.model.Cart;
-import se.iths.webshopgr3.model.CartItem;
 import se.iths.webshopgr3.model.Order;
 import se.iths.webshopgr3.service.AppUserService;
 import se.iths.webshopgr3.service.OrderService;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+
 
 @Controller
 @AllArgsConstructor
@@ -40,15 +38,8 @@ public class CheckoutController {
         return "redirect:/products";
         }
 
-    double total = 0.0;
-    for(CartItem cartItem : cart.getAllProductsInCart()){
-        total += cartItem.getProduct().getPrice()*cartItem.getQuantity();
-    }
-    BigDecimal bigDecimal = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
-    total= bigDecimal.doubleValue();
-
     model.addAttribute("cart", cart);
-    model.addAttribute("totalPrice", total);
+    model.addAttribute("totalPrice", cart.getTotalPrice());
     return "checkout";
     }
 
