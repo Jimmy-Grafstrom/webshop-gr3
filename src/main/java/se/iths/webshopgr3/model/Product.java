@@ -38,7 +38,6 @@ public class Product {
     @NotBlank(message = "Image URL is required")
     private String imageUrl;
 
-
     @Override
     public String toString() {
         return "Product{" +
