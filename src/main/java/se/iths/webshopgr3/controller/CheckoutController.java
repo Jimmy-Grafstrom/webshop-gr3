@@ -26,7 +26,6 @@ public class CheckoutController {
     private final OrderService orderService;
     private final AppUserService appUserService;
 
-
     @GetMapping
     public String checkout(HttpSession httpSession, Model model,
                            RedirectAttributes redirectAttributes) {
@@ -48,16 +47,16 @@ public class CheckoutController {
     public String processCheckout(@AuthenticationPrincipal UserDetails userDetails,
                                   HttpSession httpSession, Model model){
 
-    Cart cart = (Cart)httpSession.getAttribute("cart");
+        Cart cart = (Cart)httpSession.getAttribute("cart");
 
-    if(cart == null || cart.getAllProductsInCart().isEmpty()){
-        return "redirect:/products";
-    }
-    String username =userDetails.getUsername();
-    AppUser appUser = appUserService.findByUsername(username);
-    if(appUser == null){
-        return "redirect:/login";
-    }
+        if(cart == null || cart.getAllProductsInCart().isEmpty()){
+            return "redirect:/products";
+        }
+        String username =userDetails.getUsername();
+        AppUser appUser = appUserService.findByUsername(username);
+        if(appUser == null){
+            return "redirect:/login";
+        }
 
         Order newOrder = orderService.createOrder(cart, appUser);
         httpSession.removeAttribute("cart");

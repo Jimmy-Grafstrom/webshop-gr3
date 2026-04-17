@@ -31,7 +31,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    OttSuccessHandler ottSuccessHandler,
-                                                   MessageService messageService,
                             AuthenticationSuccessHandler authenticationSuccessHandler) throws Exception {
         http
                 .csrf(csrf -> csrf
