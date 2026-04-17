@@ -24,6 +24,10 @@ jobs:
         server-username: MY_GITHUB_USERNAME
         server-password: MY_GITHUB_TOKEN
 
+    - name: Get project version
+      id: get_version
+      run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+
     - name: Build with Maven
       run: mvn -B clean package
       env:
@@ -31,7 +35,7 @@ jobs:
         MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
     - name: Log in to Docker Hub
-      # if: github.event_name != 'pull_request'  # Kommenterat ut för att tillåta push vid PR-test
+      if: github.event_name != 'pull_request'
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -41,8 +45,8 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        # push: ${{ github.event_name != 'pull_request' }} # Kommenterat ut för att tillåta push vid PR-test
-        push: true
+        # Pushar bara om det inte är en pull request
+        push: ${{ github.event_name != 'pull_request' }}
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/webshop-gr3:latest
-          ${{ secrets.DOCKER_USERNAME }}/webshop-gr3:1.0.0
+          ${{ secrets.DOCKER_USERNAME }}/webshop-gr3:${{ steps.get_version.outputs.VERSION }}
