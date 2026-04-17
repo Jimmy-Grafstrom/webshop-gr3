@@ -39,6 +39,10 @@ public class OttSuccessHandler implements OneTimeTokenGenerationSuccessHandler {
         email.setRecipient(request.getParameter("username"));
         email.setMessage(link);
         email.setSubject("One time token link");
+        
+        // Print the link to console for development testing since no SMTP server is configured
+        System.out.println("DEBUG: Login link -> " + link);
+        
         messageService.send(email);
         redirectOneTimeTokenGenerationSuccessHandler.handle(request, response, oneTimeToken);
 
