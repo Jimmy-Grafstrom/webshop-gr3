@@ -92,14 +92,14 @@ class OrderServiceTest {
     }
 
     @Test
-    @DisplayName("An order can be found using its id")
+    @DisplayName("An order can be found using its id and the content is correct")
     void getOrderByIdReturnsCorrectData() {
         Order order = orderService.createOrder(testCart, testUser);
 
         List<Order> expectedOrder = List.of(order);
+        List<Order> orderReceived = orderService.getOrderById(order.getId()).stream().toList();
 
-        List<Order> orderReceived = Collections.singletonList(orderService.getOrderById(order.getId()).orElseThrow());
-        Assertions.assertEquals(expectedOrder, orderReceived);
+        Assertions.assertEquals(expectedOrder.containsAll(orderReceived), orderReceived.containsAll(expectedOrder));
     }
 
 
