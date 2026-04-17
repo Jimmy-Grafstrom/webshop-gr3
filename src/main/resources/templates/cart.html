@@ -1,34 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Cart</title>
+
+    <!-- ✅ Same CSS as other pages -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 
-<h1>Cart</h1>
+<!-- ✅ Header -->
+<div th:replace="fragments/header::header"></div>
 
-<div th:if="${cart == null}">
-    <p>Cart is empty</p>
+<div class="container">
+
+    <h1>Your Cart</h1>
+
+    <!-- ❌ Cart empty -->
+    <div th:if="${cart == null || cart.cartItems == null || cart.cartItems.isEmpty()}">
+        <p>Cart is empty</p>
+    </div>
+
+    <!-- ✅ Cart has items -->
+    <div th:if="${cart != null && cart.cartItems != null && !cart.cartItems.isEmpty()}">
+
+        <table class="styled-table">
+
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="item : ${cart.cartItems}">
+                <td th:text="${item.productName}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.price}"></td>
+            </tr>
+            </tbody>
+
+        </table>
+
+        <h3>Total: <span th:text="${cart.totalPrice}"></span> SEK</h3>
+
+        <button class="btn">Checkout</button>
+
+    </div>
+
 </div>
 
-<div th:if="${cart != null}">
-    <p>There are items in the cart</p>
-    <p th:text="${cart.totalPrice}"></p>
-</div>
-
-
-<!-- Loop through products -->
-<th:block th:each="cartItem : ${cart}">
-    <table>
-        <tr>
-            <td th:text="${cart.cartItems}"></td>
-        </tr>
-    </table>
-</th:block>
-
-<!--Show products-->
-<!--Show total price-->
-<!--Button: confirm order -> checkout -> redirect?-->
+<!-- ✅ Footer -->
+<div th:replace="fragments/footer::footer"></div>
 
 </body>
 </html>
