@@ -47,6 +47,17 @@ class OrderServiceTest {
 
 
     @Test
+    @DisplayName("Assert that the cart is cleared at the end of checkout")
+    public void testCreateOrder() {
+        CartItem cartItem = new CartItem(product);
+        testCart.addProductToCart(cartItem);
+        Order order = orderService.createOrder(testCart, testUser);
+
+        Assertions.assertTrue(testCart.getCartItems().isEmpty());
+
+    }
+
+    @Test
     @DisplayName("Orders can be retrieved using the username of the customer")
     void getOrdersByUsername() {
         testUser.setUsername("test2");
@@ -106,13 +117,9 @@ class OrderServiceTest {
     @Test
     @DisplayName("Orders with invalid id is not returned")
     void orderNotReturnedDueToIncorrectId() {
-
         Order order = orderService.createOrder(testCart, testUser);
-
         Optional<Order> orderReceived = orderService.getOrderById(8L);
-
         Assertions.assertEquals(Optional.empty(), orderReceived);
-
 
     }
 }
