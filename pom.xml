@@ -10,7 +10,7 @@
     </parent>
     <groupId>se.iths</groupId>
     <artifactId>webshop-gr3</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>webshop-gr3</name>
     <description>webshop-gr3</description>
     <url/>
@@ -96,6 +96,7 @@
     </dependencies>
 
     <build>
+        <finalName>app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
