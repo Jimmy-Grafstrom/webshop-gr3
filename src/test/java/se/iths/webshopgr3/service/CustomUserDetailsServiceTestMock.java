@@ -26,7 +26,6 @@ class CustomUserDetailsServiceTestMock {
     @BeforeEach
     void setUp() {
         appUser = new AppUser();
-        appUser.setRole("USER");
         appUser.setUsername("test@test.com");
         appUser.setPassword("password123");
         appUser.setConsent(true);
@@ -35,11 +34,9 @@ class CustomUserDetailsServiceTestMock {
     @Test
     @DisplayName("Throws exception since no user is found")
     void loadByUsernameThrowsExceptionSinceUserIsNotFound() {
-
         Assertions.assertThrows(UsernameNotFoundException.class, () -> {
             customUserDetailsService.loadUserByUsername(appUser.getUsername());
         });
-
     }
 
 }

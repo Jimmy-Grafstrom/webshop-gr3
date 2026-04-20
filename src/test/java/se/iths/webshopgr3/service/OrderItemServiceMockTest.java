@@ -4,21 +4,27 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import se.iths.webshopgr3.model.CartItem;
 import se.iths.webshopgr3.model.Order;
 import se.iths.webshopgr3.model.OrderItem;
 import se.iths.webshopgr3.model.Product;
+import se.iths.webshopgr3.repository.OrderItemRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@SpringBootTest
-class OrderItemServiceTest {
+@ExtendWith(MockitoExtension.class)
+class OrderItemServiceMockTest {
 
-    @Autowired
+    @InjectMocks
     private OrderItemService orderItemService;
+
+    @Mock
+    private OrderItemRepository orderItemRepository;
 
     private Order testOrder;
 
@@ -51,12 +57,11 @@ class OrderItemServiceTest {
     @Test
     @DisplayName("Assert that the item retrieved matches the values sent into the method")
     void createOrderItem() {
-        OrderItem returnedOrderItem = orderItemService.createOrderItem(cartItem, testOrder);
+        OrderItem ordertItemReturned = orderItemService.createOrderItem(cartItem, testOrder);
 
-        Assertions.assertEquals(cartItem.getProduct().getName(), returnedOrderItem.getProductName());
-        Assertions.assertEquals(cartItem.getQuantity(), returnedOrderItem.getQuantity());
-        Assertions.assertEquals(cartItem.getProduct().getPrice(), returnedOrderItem.getPrice());
-
-
+        Assertions.assertEquals(cartItem.getProduct().getName(), ordertItemReturned.getProductName());
+        Assertions.assertEquals(cartItem.getQuantity(), ordertItemReturned.getQuantity());
+        Assertions.assertEquals(cartItem.getProduct().getPrice(), ordertItemReturned.getPrice());
+        Assertions.assertEquals(testOrder.getId(), ordertItemReturned.getOrder().getId());
     }
 }
