@@ -13,7 +13,7 @@ import se.iths.webshopgr3.model.AppUser;
 import se.iths.webshopgr3.repository.AppUserRepository;
 
 @ExtendWith(MockitoExtension.class)
-class CustomerUserDetailsServiceTestMock {
+class CustomUserDetailsServiceTestMock {
 
     @Mock
     private AppUserRepository appUserRepository;
