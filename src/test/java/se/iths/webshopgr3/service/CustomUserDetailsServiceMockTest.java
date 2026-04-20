@@ -7,13 +7,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import se.iths.webshopgr3.model.AppUser;
 import se.iths.webshopgr3.repository.AppUserRepository;
 
+import java.util.Optional;
+
 @ExtendWith(MockitoExtension.class)
-class CustomUserDetailsServiceTestMock {
+class CustomUserDetailsServiceMockTest {
 
     @Mock
     private AppUserRepository appUserRepository;
@@ -33,10 +36,11 @@ class CustomUserDetailsServiceTestMock {
     }
 
     @Test
-    @DisplayName("Assert correct details are fetched")
+    @DisplayName("Assert findByUsername is called in AppUserRepository")
     void loadUserByUsernameWorksProperly() {
-
-
+        Mockito.when(appUserRepository.findByUsername(appUser.getUsername())).thenReturn(Optional.of(appUser));
+        customUserDetailsService.loadUserByUsername(appUser.getUsername());
+        Mockito.verify(appUserRepository).findByUsername(appUser.getUsername());
     }
 
     @Test
