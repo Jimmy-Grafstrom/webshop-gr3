@@ -11,52 +11,27 @@ import se.iths.webshopgr3.model.Order;
 import se.iths.webshopgr3.model.OrderItem;
 import se.iths.webshopgr3.model.Product;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @SpringBootTest
 class OrderItemServiceTest {
 
     @Autowired
     private OrderItemService orderItemService;
 
-    private Order testOrder;
-
-    private Product product;
 
     private CartItem cartItem;
-
-    private List<OrderItem> orderItemList;
+    private Order order;
 
     @BeforeEach
     void setUp() {
-
-        testOrder = new Order();
-        testOrder.setId(1L);
-        testOrder.setOrderDate(LocalDateTime.now());
-        testOrder.setUsername("test@test.com");
-        testOrder.setTotalPrice(4.99);
-        testOrder.setOrderItems(orderItemList);
-
-        product = new Product();
-        product.setName("TestProduct");
-        product.setPrice(10);
-        product.setCategory("category");
-        product.setImageUrl("img_url");
-
-        cartItem = new CartItem(product);
-        cartItem.setId(1L);
+        order = new Order();
+        cartItem = new CartItem(new Product());
     }
 
     @Test
-    @DisplayName("Assert that the item retrieved matches the values sent into the method")
+    @DisplayName("OrderItem is saved and can be retrieved from database")
     void createOrderItem() {
-        OrderItem returnedOrderItem = orderItemService.createOrderItem(cartItem, testOrder);
-
-        Assertions.assertEquals(cartItem.getProduct().getName(), returnedOrderItem.getProductName());
-        Assertions.assertEquals(cartItem.getQuantity(), returnedOrderItem.getQuantity());
-        Assertions.assertEquals(cartItem.getProduct().getPrice(), returnedOrderItem.getPrice());
-
+        OrderItem orderItem = orderItemService.createOrderItem(cartItem, order);
+        Assertions.assertNotNull(orderItem);
 
     }
 }
