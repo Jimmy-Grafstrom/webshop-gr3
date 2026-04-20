@@ -19,5 +19,4 @@ public class TestConfig {
         return new MessageService(Map.of("email", messenger));
     }
 
-
 }
