@@ -42,6 +42,10 @@ class OrderItemServiceTestMock {
 
     @BeforeEach
     void setUp() {
+        //ORDERITEM
+        //CARTITEM
+        //ORDER
+
         testUser = new AppUser(1L, "name", "password", true, "user1");
         testCart = new Cart();
         product = new Product(1L, "TestProduct", 10, "category", "img_url");
@@ -52,6 +56,6 @@ class OrderItemServiceTestMock {
     void createOrderItem() {
 
     }
-    
+
 
 }

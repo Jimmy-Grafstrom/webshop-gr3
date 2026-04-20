@@ -33,13 +33,6 @@ class CustomUserDetailsServiceTestMock {
     }
 
     @Test
-    @DisplayName("Assert correct details are fetched")
-    void loadUserByUsernameWorksProperly() {
-
-
-    }
-
-    @Test
     @DisplayName("Throws exception since no user is found")
     void loadByUsernameThrowsExceptionSinceUserIsNotFound() {
 
