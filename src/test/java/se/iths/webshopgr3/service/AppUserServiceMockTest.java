@@ -19,7 +19,7 @@ import se.iths.webshopgr3.repository.AppUserRepository;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-class AppUserServiceTestMock {
+class AppUserServiceMockTest {
 
     @Mock
     private AppUserRepository appUserRepository;
@@ -62,7 +62,7 @@ class AppUserServiceTestMock {
         AppUser userReturned = appUserService.findByUsername(testUser.getUsername());
         Assertions.assertEquals(testUser.getId(), userReturned.getId());
     }
-    
+
 
     @Test
     @DisplayName("Assert that user can be deleted properly")

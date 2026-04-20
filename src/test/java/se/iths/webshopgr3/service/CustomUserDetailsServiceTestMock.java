@@ -13,7 +13,7 @@ import se.iths.webshopgr3.model.AppUser;
 import se.iths.webshopgr3.repository.AppUserRepository;
 
 @ExtendWith(MockitoExtension.class)
-class CustomUserDetailsServiceTestMock {
+class CustomerUserDetailsServiceTestMock {
 
     @Mock
     private AppUserRepository appUserRepository;
@@ -35,6 +35,7 @@ class CustomUserDetailsServiceTestMock {
     @Test
     @DisplayName("Assert correct details are fetched")
     void loadUserByUsernameWorksProperly() {
+
 
     }
 
