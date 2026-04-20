@@ -57,6 +57,7 @@ class AppUserServiceMockTest {
     @Test
     @DisplayName("Assert that save-method is called when user is saved")
     void findByUsernameRetrievesCorrectUser() {
+
         Mockito.when(appUserRepository.findByUsername(testUser.getUsername())).thenReturn(Optional.ofNullable(testUser));
         AppUser userReturned = appUserService.findByUsername(testUser.getUsername());
         Assertions.assertEquals(testUser.getId(), userReturned.getId());
@@ -66,8 +67,10 @@ class AppUserServiceMockTest {
     @Test
     @DisplayName("Assert that user can be deleted properly")
     void deleteUser() {
+
         appUserService.deleteUser(testUser.getUsername());
         Mockito.verify(appUserRepository).deleteByUsername(testUser.getUsername());
+
     }
 
     @Test
@@ -76,6 +79,7 @@ class AppUserServiceMockTest {
         Mockito.when(appUserRepository.findByUsername(testUser.getUsername())).thenReturn(Optional.of(testUser));
         appUserService.sendAccountInfoToEmail(testUser.getUsername());
         Mockito.verify(messageService).send(Mockito.any(Email.class));
+
     }
 
 }
