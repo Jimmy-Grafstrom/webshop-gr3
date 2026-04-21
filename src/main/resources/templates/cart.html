@@ -4,55 +4,53 @@
     <meta charset="UTF-8">
     <title>Cart</title>
 
-    <!-- ✅ Same CSS as other pages -->
+    <!-- ✅ ADD THIS -->
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 
-<!-- ✅ Header -->
 <div th:replace="fragments/header::header"></div>
 
 <div class="container">
 
     <h1>Your Cart</h1>
 
-    <!-- ❌ Cart empty -->
-    <div th:if="${cart == null || cart.cartItems == null || cart.cartItems.isEmpty()}">
+    <div th:if="${cart == null || cart.cartItems.isEmpty()}">
         <p>Cart is empty</p>
     </div>
 
-    <!-- ✅ Cart has items -->
-    <div th:if="${cart != null && cart.cartItems != null && !cart.cartItems.isEmpty()}">
+    <div th:if="${cart != null && !cart.cartItems.isEmpty()}">
 
         <table class="styled-table">
-
             <thead>
             <tr>
                 <th>Product</th>
-                <th>Quantity</th>
                 <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
             </tr>
             </thead>
 
             <tbody>
             <tr th:each="item : ${cart.cartItems}">
-                <td th:text="${item.productName}"></td>
+                <td th:text="${item.product.name}"></td>
+                <td th:text="${item.product.price}"></td>
                 <td th:text="${item.quantity}"></td>
-                <td th:text="${item.price}"></td>
+                <td th:text="${item.product.price * item.quantity}"></td>
             </tr>
             </tbody>
-
         </table>
 
         <h3>Total: <span th:text="${cart.totalPrice}"></span> SEK</h3>
 
-        <button class="btn">Checkout</button>
+        <form th:action="@{/checkout}" method="get">
+            <button type="submit" class="btn">Check Out</button>
+        </form>
 
     </div>
 
 </div>
 
-<!-- ✅ Footer -->
 <div th:replace="fragments/footer::footer"></div>
 
 <footer th:replace="fragments/footer::footer"></footer>
