@@ -23,13 +23,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemService orderItemService;
     private final MessageService messageService;
-    private final AppUserRepository appUserRepository;
 
-    /**
-     * Creates a permanent Order in the database based on the content of a Cart.
-     * Mapping and persistence is handled here. Email confirmation and workflow
-     * orchestration should be handled by the CheckoutService.
-     */
     public Order createOrder(Cart cart, AppUser user) {
         Order order = new Order();
         order.setUsername(user.getUsername());
