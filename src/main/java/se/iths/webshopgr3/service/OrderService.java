@@ -2,19 +2,18 @@ package se.iths.webshopgr3.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import se.iths.lw.mailfunctionlibrary.model.Email;
+import se.iths.lw.mailfunctionlibrary.service.MessageService;
 import se.iths.webshopgr3.model.AppUser;
 import se.iths.webshopgr3.model.Cart;
 import se.iths.webshopgr3.model.Order;
 import se.iths.webshopgr3.model.OrderItem;
-import se.iths.webshopgr3.repository.AppUserRepository;
 import se.iths.webshopgr3.repository.OrderRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import se.iths.lw.mailfunctionlibrary.model.Email;
-import se.iths.lw.mailfunctionlibrary.service.MessageService;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +38,6 @@ public class OrderService {
 
         Order savedOrder = orderRepository.save(order);
         
-        // Send confirmation email after saving the order
         sendOrderConfirmationEmail(user, savedOrder);
         
         cart.clearCart();
