@@ -3,29 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
-    <style>
-        table { border-collapse: collapse; width: 80%; margin: 20px auto; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        th { background-color: #f2f2f2; }
-        .total { text-align: right; margin-right: 10%; font-size: 1.2em; }
-        .buttons { text-align: center; margin-top: 20px; }
-        button, .btn { padding: 8px 20px; font-size: 1em; margin: 0 10px; cursor: pointer;}
-        .alert {
-            padding: 15px;
-            margin: 10px auto;
-            border-radius: 5px;
-            text-align: center;
-            width: 80%;
-        }
-        .alert-warning {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeeba;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
 </head>
 <body>
-<header th:replace="~{fragments/header::header}"></header>
+<div th:replace="~{fragments/header::header}"></div>
+
+<div>
 
 <div th:if="${errorMessage}" class="alert alert-warning" th:text="${errorMessage}">
 
@@ -62,17 +46,17 @@
     </div>
 </div>
 
-<div class="buttons">
+<div>
     <a href="/products" class="btn">Continue shopping</a>
     <form th:action="@{/checkout}" method="post" style="display:inline;">
-        <button type="submit">Confirm the order</button>
+        <button type="submit" class="btn">Confirm the order</button>
     </form>
 </div>
 
 <br>
 <br>
 <br>
-<footer th:replace="fragments/footer::footer"></footer>
-
+<div th:replace="fragments/footer::footer"></div>
+</div>
 </body>
 </html>
