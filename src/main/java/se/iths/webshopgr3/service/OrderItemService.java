@@ -12,10 +12,6 @@ import se.iths.webshopgr3.repository.OrderItemRepository;
 public class OrderItemService {
     private final OrderItemRepository orderItemRepository;
 
-    /**
-     * Creates an OrderItem based on a CartItem and links it to an Order.
-     * Does not need to be saved separately as Order uses CascadeType.ALL.
-     */
     public OrderItem createOrderItem(CartItem cartItem, Order order) {
         OrderItem orderItem = new OrderItem();
         orderItem.setProductName(cartItem.getProduct().getName());

@@ -2,19 +2,18 @@ package se.iths.webshopgr3.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import se.iths.lw.mailfunctionlibrary.model.Email;
+import se.iths.lw.mailfunctionlibrary.service.MessageService;
 import se.iths.webshopgr3.model.AppUser;
 import se.iths.webshopgr3.model.Cart;
 import se.iths.webshopgr3.model.Order;
 import se.iths.webshopgr3.model.OrderItem;
-import se.iths.webshopgr3.repository.AppUserRepository;
 import se.iths.webshopgr3.repository.OrderRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import se.iths.lw.mailfunctionlibrary.model.Email;
-import se.iths.lw.mailfunctionlibrary.service.MessageService;
 
 @Service
 @RequiredArgsConstructor
@@ -23,13 +22,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemService orderItemService;
     private final MessageService messageService;
-    private final AppUserRepository appUserRepository;
 
-    /**
-     * Creates a permanent Order in the database based on the content of a Cart.
-     * Mapping and persistence is handled here. Email confirmation and workflow
-     * orchestration should be handled by the CheckoutService.
-     */
     public Order createOrder(Cart cart, AppUser user) {
         Order order = new Order();
         order.setUsername(user.getUsername());
@@ -45,7 +38,6 @@ public class OrderService {
 
         Order savedOrder = orderRepository.save(order);
         
-        // Send confirmation email after saving the order
         sendOrderConfirmationEmail(user, savedOrder);
         
         cart.clearCart();
