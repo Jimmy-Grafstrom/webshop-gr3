@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Order Confirmation</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <header th:replace="~{fragments/header :: header}"></header>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <div class="container">
 
     <main style="text-align: center; padding: 50px;">
         <h1>Thank you for your order! ✅</h1>
@@ -20,6 +23,7 @@
         </form>
     </main>
 
-    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
